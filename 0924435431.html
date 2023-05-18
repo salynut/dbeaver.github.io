@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Formulario de certificado de atención</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+	{text-align: right; font-family: "Times New Roman,Times";}
+	</style>
+  </head>
+  <body>
+    <h1><span style="font-family: Times New Roman,Times,serif;">Formulario de
+        certificado de atención</span></h1>
+    <form> <label for="nombre">Nombre:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="nombre" name="nombre" required="" type="text"><br>
+      <label for="ci">Cédula :</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp;&nbsp; &nbsp; <input id="ci" name="ci" required="" type="text"><br>
+      <label for="fecha">Fecha:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; <input id="fecha" name="fecha" required=""
+        type="date"><br>
+      <label for="hora">Hora:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="hora" name="hora" required="" type="time"><br>
+      <label for="dias">Reposo días&nbsp;</label> &nbsp; &nbsp; &nbsp;&nbsp; <input
+        id="dias" name="dias" required="" type="number"><br>
+      <label for="patologia">Patología:</label> &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp;&nbsp;&nbsp;
+      <select id="patologia" name="patologia">
+        <option value="CARIES CON EXPOSICIÓN PULPAR (K025)">Caries</option>
+        <option value="DIENTES SUPERNUMERARIOS (K001)">supernumerarios</option>
+        <option value="ABSCESO PERIAPICAL CON FISTULA (K046)">Absceso</option>
+        <option value="NECROSIS DE LA PULPA (K041)">Necrosis pulpar</option>
+      </select>
+      <br>
+      <label for="procedimiento">Procedimiento:</label> &nbsp;&nbsp;
+      <select id="procedimiento" name="procedimiento">
+        <option value="la reconstrucción de la pieza">Reconstrucción</option>
+        <option value="la extraccion de la pieza">Extracción</option>
+        <option value="realizar endodoncia en la pieza">Endodoncia</option>
+      </select>
+      <br>
+      <label for="ci">Pieza:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; <input id="D1" name="D1" required="" type="text"><br>
+      <button type="button" onclick="generarCertificado()">Generar certificado</button>
+    </form>
+    <script>
+function generarCertificado() {
+  // Obtener los valores del formulario
+  const nombre = document.getElementById("nombre").value;
+  const ci = document.getElementById("ci").value;
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
+  const dias = document.getElementById("dias").value;
+  const patologia = document.getElementById("patologia").value;
+  const procedimiento = document.getElementById("procedimiento").value;
+  const D1 = document.getElementById("D1").value;
+
+  // Crear el texto del certificado
+  const textoCertificado = `A las ${hora} del ${fecha} acudió a consulta ${nombre} con número de cédula ${ci},<br>  
+fue atendido en el consultorio, por presentar ${patologia} en la pieza ${D1},<br>
+luego de la evaluación pertinente, se decidió ${procedimiento}.<br><br> 
+Debido al procedimiento realizado se recomienda ${dias} días de descanso.<br><br>
+La presente se expide a petición de la parte interesada y para utilizarse en lo que le convenga.`;
+
+  // Abrir la nueva ventana y escribir el certificado
+  const nuevaVentana = window.open("", "Certificado de atención");
+  nuevaVentana.document.write(`<pre style="text-align: center;"><img src="IMG/membrete1.png" alt="1" title="1"
+   style="width: 711px; height: 102px;"</pre><br><br>
+<pre style="text-align: right; font-family: Times New Roman,Times,serif;"><p>Guayaquil, ${fecha}</p></pre><br><br>
+<pre style="font-family: Times New Roman,Times,serif; text-align: center;"><h1><b> CERTIFICADO DE ATENCIÓN</b></h1></pre><br><br> 
+<pre style="text-align: center; font-family: Times New Roman,Times,serif;"></p>${textoCertificado}</p></pre><br><br>
+<pre style="text-align: left; font-family: Times New Roman,Times,serif;" ><p>Atentamente,</p></pre><br><br>
+<pre style="text-align: center;"><img src="IMG/firma1.png"alt="f" title="f" style="width: 95px; height: 131px;">
+<pre style="font-family: Times New Roman,Times,serif; text-align: center;"><p>Sandra Alvarez</p></pre>`);
+}
+
+  </script>
+  </body>
+</html>
